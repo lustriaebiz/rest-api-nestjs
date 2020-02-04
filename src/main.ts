@@ -4,9 +4,6 @@ import { AppModule } from './app.module';
 /** swagger */
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-
-import * as expressListRoutes from 'express-list-routes';
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -14,9 +11,6 @@ async function bootstrap() {
 
   await app.listen(3000);
   
-  const server = app.getHttpServer();
-  const router = server._events.request._router;
-  console.log(expressListRoutes({}, 'API:', router));
 }
 
 function setupswagger(app){
