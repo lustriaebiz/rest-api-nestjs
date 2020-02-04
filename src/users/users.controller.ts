@@ -4,16 +4,10 @@ import { User } from './user.entity';
 
 /** db transaction */
 import { getConnection } from "typeorm";
-import { ApiHeader, ApiResponse, ApiOperation } from '@nestjs/swagger';
-
-/** header */
-@ApiHeader({
-    name: 'Auth',
-    description: 'Auth token',
-})
-/** */
+import { ApiHeader, ApiResponse, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('users')
+@ApiBearerAuth() //To enable bearer authentication, use @ApiBearerAuth().
 export class UsersController {
 
     constructor(private service: UsersService) { }
