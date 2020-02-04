@@ -29,11 +29,10 @@ export class UsersService {
     }
 
     async updateUser(user: User) {
-        return false;
-        // this.usersRepository.save(user)
+        this.usersRepository.save(user)
     }
 
-    async deleteUser(user: User) {
-        this.usersRepository.delete(user);
+    async deleteUser(id:number) {
+        this.usersRepository.delete(id);
     }
 }

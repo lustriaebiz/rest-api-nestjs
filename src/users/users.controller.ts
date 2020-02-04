@@ -4,7 +4,7 @@ import { User } from './user.entity';
 
 /** db transaction */
 import { getConnection } from "typeorm";
-import { ApiHeader, ApiResponse } from '@nestjs/swagger';
+import { ApiHeader, ApiResponse, ApiOperation } from '@nestjs/swagger';
 
 /** header */
 @ApiHeader({
@@ -102,7 +102,7 @@ export class UsersController {
     }
 
     @Delete(':id')
-    deleteUser(@Param() params) {
-        return this.service.deleteUser(params.id);
+    deleteUser(@Param('id', new ParseIntPipe()) id: number) {
+        return this.service.deleteUser(id);
     }
 }
