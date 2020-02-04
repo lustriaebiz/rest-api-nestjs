@@ -10,8 +10,14 @@ export class UsersController {
 
     constructor(private service: UsersService) { }
 
+    
+    @Get()
+    get() {
+        return this.service.getUsers();
+    }
+
     @Get(':id')
-    get(@Param() params) {
+    getById(@Param() params) {
         return this.service.getUser(params.id);
     }
 

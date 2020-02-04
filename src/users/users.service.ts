@@ -8,7 +8,7 @@ import { UserInterface } from './user.interface.interface';
 export class UsersService {
     constructor(@InjectRepository(User) private usersRepository: Repository<User>){ }
 
-    async getUsers(user: User): Promise<User[]> {
+    async getUsers(): Promise<User[]> {
         return await this.usersRepository.find();
     }
 
