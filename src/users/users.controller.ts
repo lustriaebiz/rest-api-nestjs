@@ -1,10 +1,11 @@
-import { Controller, Post, Body, Get, Put, Delete,Param, ParseIntPipe} from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete,Param, ParseIntPipe, UseGuards} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 
 /** db transaction */
 import { getConnection } from "typeorm";
 import { ApiResponse, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Users')
 @Controller('users')
@@ -17,6 +18,7 @@ export class UsersController {
     @Get()
     @ApiResponse({ status: 201, description: 'The record has been successfully get.'})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
+    @UseGuards(AuthGuard('jwt'))
     get() {
         return this.service.getUsers();
     }
