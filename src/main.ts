@@ -19,7 +19,7 @@ function setupswagger(app){
     .setDescription('Virtual Card Number by BNI')
     .setVersion('1.0')
     .addTag('vcn')
-    .addBasicAuth()
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs-api', app, document);
