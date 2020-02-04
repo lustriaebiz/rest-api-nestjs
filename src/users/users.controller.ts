@@ -9,16 +9,15 @@ import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Users')
 @Controller('users')
+@UseGuards(AuthGuard('jwt'))
 @ApiBearerAuth() //To enable bearer authentication, use @ApiBearerAuth().
 export class UsersController {
 
     constructor(private service: UsersService) { }
 
-    
     @Get()
     @ApiResponse({ status: 201, description: 'The record has been successfully get.'})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
-    @UseGuards(AuthGuard('jwt'))
     get() {
         return this.service.getUsers();
     }
