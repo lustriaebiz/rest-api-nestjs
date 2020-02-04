@@ -1,9 +1,17 @@
-import { Controller, Post, Body, Get, Put, Delete,Param} from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete,Param, ParseIntPipe} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 
 /** db transaction */
 import { getConnection } from "typeorm";
+import { ApiHeader, ApiResponse } from '@nestjs/swagger';
+
+/** header */
+@ApiHeader({
+    name: 'Auth',
+    description: 'Auth token',
+})
+/** */
 
 @Controller('users')
 export class UsersController {
@@ -12,13 +20,15 @@ export class UsersController {
 
     
     @Get()
+    @ApiResponse({ status: 201, description: 'The record has been successfully get.'})
+    @ApiResponse({ status: 403, description: 'Forbidden.'})
     get() {
         return this.service.getUsers();
     }
 
     @Get(':id')
-    getById(@Param() params) {
-        return this.service.getUser(params.id);
+    getById(@Param('id', new ParseIntPipe()) id: number) {
+        return this.service.getUser(id);
     }
 
     // @Post()
@@ -27,6 +37,7 @@ export class UsersController {
     // }
 
     @Post('/dbtrx')
+    
     async trx(@Body() user: User) {
         console.log('masuk');
         
