@@ -16,16 +16,23 @@ export class UsersService {
         return await this.usersRepository.find({'id': _id});
     }
 
+    async findByEmail(email: string): Promise<User> {
+        return await this.usersRepository.findOne({
+            where: {
+                email: email,
+            }
+        });
+    }
+
     async createUser(user: User){
         return await this.usersRepository.save(user);
     }
 
     async updateUser(user: User) {
-        return false;
-        // this.usersRepository.save(user)
+        this.usersRepository.save(user)
     }
 
-    async deleteUser(user: User) {
-        this.usersRepository.delete(user);
+    async deleteUser(id:number) {
+        this.usersRepository.delete(id);
     }
 }

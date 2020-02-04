@@ -1,25 +1,30 @@
-import { Controller, Post, Body, Get, Put, Delete,Param, ParseIntPipe} from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete,Param, ParseIntPipe, UseGuards} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 
 /** db transaction */
 import { getConnection } from "typeorm";
-import { ApiHeader, ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
-/** header */
-@ApiHeader({
-    name: 'Auth',
-    description: 'Auth token',
-})
-/** */
-
+@ApiTags('Users')
 @Controller('users')
+
+/** guard by controller */
+@UseGuards(AuthGuard('jwt'))
+/** end guard by controller */
+
+@ApiBearerAuth() //To enable bearer authentication, use @ApiBearerAuth().
 export class UsersController {
 
     constructor(private service: UsersService) { }
 
-    
     @Get()
+    /** guard by route
+     * uncomment jika ingin auth guard by route saja
+     */
+    // @UseGuards(AuthGuard('jwt')) 
+    /** end guard by route */
     @ApiResponse({ status: 201, description: 'The record has been successfully get.'})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     get() {
@@ -102,7 +107,7 @@ export class UsersController {
     }
 
     @Delete(':id')
-    deleteUser(@Param() params) {
-        return this.service.deleteUser(params.id);
+    deleteUser(@Param('id', new ParseIntPipe()) id: number) {
+        return this.service.deleteUser(id);
     }
 }

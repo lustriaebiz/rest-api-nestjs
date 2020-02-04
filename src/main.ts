@@ -10,6 +10,7 @@ async function bootstrap() {
   setupswagger(app);
 
   await app.listen(3000);
+  
 }
 
 function setupswagger(app){
@@ -18,6 +19,7 @@ function setupswagger(app){
     .setDescription('Virtual Card Number by BNI')
     .setVersion('1.0')
     .addTag('vcn')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs-api', app, document);
