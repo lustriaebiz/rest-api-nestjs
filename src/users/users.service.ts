@@ -21,7 +21,8 @@ export class UsersService {
     }
 
     async updateUser(user: User) {
-        this.usersRepository.save(user)
+        return false;
+        // this.usersRepository.save(user)
     }
 
     async deleteUser(user: User) {
