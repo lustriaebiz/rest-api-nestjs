@@ -1,28 +1,27 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import * as crypto from 'crypto';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiHideProperty, ApiExcludeEndpoint } from '@nestjs/swagger';
 
 @Entity()
 export class User {
 
     @PrimaryGeneratedColumn()
-    @ApiProperty({ example: 2 })
     id: number;
 
     @Column({length: 25})
-    @ApiProperty({ example: 'Lustria Ebiz' })
+    @ApiProperty({ example: 'Lustria Ebiz', required: false })
     fullName: string;
 
     @Column('date')
-    @ApiProperty({ example: '2020-01-20' })
+    @ApiProperty({ example: '2020-01-20', required: false })
     birthdate: Date;
 
     @Column()
-    @ApiProperty({ example: true })
+    @ApiProperty({ example: true, required: false })
     isActive: boolean;
 
     @Column()
-    @ApiProperty({ example: 'lustriaebiz@gmail.com' })
+    @ApiProperty({ example: 'lustriaebiz@gmail.com', required: false })
     email: string;
 
     @BeforeInsert()
@@ -33,7 +32,8 @@ export class User {
     @Column()
     @ApiProperty({ 
         example: 'secret!@#' ,
-        description: 'password bebas'
+        description: 'password bebas',
+        required: false
     })
     password: string;
 
