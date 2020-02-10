@@ -1,3 +1,9 @@
 tutor: 
 https://medium.com/@shaibenshimol/nestjs-and-mysql-in-10-minutes-711e02ec1dab
 https://www.techiediaries.com/nestjs-tutorial-jwt-authentication/
+
+
+
+authentication passport-jwt [done]
+swagger [done]
+db transaction [done]

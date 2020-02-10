@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from  '@nestjs/jwt';
 import { UsersService } from  '../../users/users.service'
 import { User } from  '../../users/user.entity';
+import { Login } from 'src/shared/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -10,11 +11,11 @@ export class AuthService {
         private readonly jwtService: JwtService
     ) { }
 
-    private async validate(userData: User): Promise<User> {
+    private async validate(userData: Login): Promise<User> {
         return await this.usersService.findByEmail(userData.email);
     }
 
-    public async login(user: User): Promise< any | { status: number }>{
+    public async login(user: Login): Promise< any | { status: number }>{
         return this.validate(user).then((userData)=>{
           if(!userData){
             return { status: 404 };

@@ -6,6 +6,7 @@ import { User } from './user.entity';
 import { getConnection } from "typeorm";
 import { ApiResponse, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { response } from 'express';
 
 @ApiTags('Users')
 @Controller('users')
@@ -108,6 +109,18 @@ export class UsersController {
 
     @Delete(':id')
     deleteUser(@Param('id', new ParseIntPipe()) id: number) {
-        return this.service.deleteUser(id);
+        if(this.service.deleteUser(id)){
+            let response = {
+                status: true,
+                message: 'Success delete data.'
+            }
+        }else{
+            let response = {
+                status: false,
+                message: 'Failed delete data.'
+            }
+        }
+
+        return response;
     }
 }

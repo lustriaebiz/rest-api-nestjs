@@ -9,19 +9,19 @@ export class User {
     id: number;
 
     @Column({length: 25})
-    @ApiProperty({ example: 'Lustria Ebiz', required: false })
+    @ApiProperty({ example: 'Lustria Ebiz', required: true })
     fullName: string;
 
     @Column('date')
-    @ApiProperty({ example: '2020-01-20', required: false })
+    @ApiProperty({ example: '2020-01-20', required: true })
     birthdate: Date;
 
     @Column()
-    @ApiProperty({ example: true, required: false })
+    @ApiProperty({ example: true, required: true })
     isActive: boolean;
 
     @Column()
-    @ApiProperty({ example: 'lustriaebiz@gmail.com', required: false })
+    @ApiProperty({ example: 'lustriaebiz@gmail.com', required: true })
     email: string;
 
     @BeforeInsert()
@@ -33,7 +33,7 @@ export class User {
     @ApiProperty({ 
         example: 'secret!@#' ,
         description: 'password bebas',
-        required: false
+        required: true
     })
     password: string;
 
