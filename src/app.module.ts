@@ -6,11 +6,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 
+// task-schedule
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksModule } from './tasks/tasks.module';
+
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRoot(),
     UsersModule,
-    AuthModule
+    AuthModule,
+    TasksModule
   ],
   controllers: [AppController],
   providers: [AppService],
