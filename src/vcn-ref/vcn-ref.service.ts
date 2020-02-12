@@ -8,6 +8,10 @@ export class VcnRefService {
     
     constructor(
         @InjectRepository(VcnRef) 
-        private usersRepository: Repository<VcnRef>
+        private vcnRefRepository: Repository<VcnRef>
     ){ }
+
+    async get(): Promise<VcnRef[]> {
+        return await this.vcnRefRepository.find();
+    }
 }

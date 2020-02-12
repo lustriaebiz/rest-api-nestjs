@@ -18,7 +18,7 @@ import { response } from 'express';
 @ApiBearerAuth() //To enable bearer authentication, use @ApiBearerAuth().
 export class UsersController {
 
-    constructor(private service: UsersService) { }
+    constructor(private service$: UsersService) { }
 
     @Get()
     /** guard by route
@@ -29,17 +29,17 @@ export class UsersController {
     @ApiResponse({ status: 201, description: 'The record has been successfully get.'})
     @ApiResponse({ status: 403, description: 'Forbidden.'})
     get() {
-        return this.service.getUsers();
+        return this.service$.getUsers();
     }
 
     @Get(':id')
     getById(@Param('id', new ParseIntPipe()) id: number) {
-        return this.service.getUser(id);
+        return this.service$.getUser(id);
     }
 
     // @Post()
     // create(@Body() user: User) {
-    //     return this.service.createUser(user);
+    //     return this.service$.createUser(user);
     // }
 
     @Post('/dbtrx')
@@ -89,7 +89,7 @@ export class UsersController {
         /** ELSE */
         
         // await getConnection().transaction(async entityManager => {
-        //     await this.service.createUser(user);
+        //     await this.service$.createUser(user);
         //     let userUpdate : User = {
         //             'id': 1,
         //             'fullName': 'Lustria',
@@ -97,19 +97,19 @@ export class UsersController {
         //             'isActive': true
         //     };
 
-        //     await this.service.updateUser(userUpdate);
+        //     await this.service$.updateUser(userUpdate);
         //     // ...
         // });
     }
 
     @Put()
     update(@Body() user: User) {
-        return this.service.updateUser(user);
+        return this.service$.updateUser(user);
     }
 
     @Delete(':id')
     deleteUser(@Param('id', new ParseIntPipe()) id: number) {
-        if(this.service.deleteUser(id)){
+        if(this.service$.deleteUser(id)){
             let response = {
                 status: true,
                 message: 'Success delete data.'
