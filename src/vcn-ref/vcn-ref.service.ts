@@ -14,4 +14,8 @@ export class VcnRefService {
     async get(): Promise<VcnRef[]> {
         return await this.vcnRefRepository.find();
     }
+
+    async getById(_id): Promise<VcnRef[]> {
+        return await this.vcnRefRepository.find({'id': _id});
+    }
 }
