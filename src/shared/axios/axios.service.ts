@@ -14,10 +14,26 @@ export class AxiosService {
     }
 
 
-    async post(body:any = false): Promise<any> {
+    async post_json(body:any = false): Promise<any> {
         return await axios.post(this.url,body).then(function(response){
             return response.data;
         });
+    }
+
+    async post_params(data:any): Promise<any> {
+        const params = new URLSearchParams();
+
+        /** set params */
+        params.append('param1', 'value1');
+        params.append('param2', 'value2');
+
+        data.forEach(element => {
+            params.append(element.key, element.value);
+        });
+
+        return await axios.post(this.url, params).then(function(response){
+            return response.data;
+        })
     }
 
     async get(): Promise<any> {

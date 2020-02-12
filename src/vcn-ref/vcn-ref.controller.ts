@@ -35,7 +35,7 @@ export class VcnRefController {
             userId: 1
         };
 
-        let post = await this.axios$.post(body);
+        let post = await this.axios$.post_json(body);
         console.log('data post: ', post);
 
         return {status: true, data: post};
