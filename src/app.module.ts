@@ -15,6 +15,8 @@ import { VcnRefModule } from './vcn-ref/vcn-ref.module';
 import { VcnRef } from './vcn-ref/vcn-ref.entity';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
+import { TransformInterceptor } from './common/interceptor/transform.interceptor';
+import { ErrorsInterceptor } from './common/interceptor/errors.interceptor';
 
 @Module({
   imports: [
@@ -52,10 +54,21 @@ import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
   controllers: [AppController],
   providers: [
     AppService,
+    
+    /** Interceptor */
     {
       provide: APP_INTERCEPTOR,
-      useClass: LoggingInterceptor,
+      useClass: LoggingInterceptor, 
     },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor, 
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ErrorsInterceptor, 
+    },
+    /** */
   ],
 })
 export class AppModule implements NestModule {

@@ -5,15 +5,17 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 /** csrf */
-import * as csurf from 'csurf';
-import * as rateLimit from 'express-rate-limit';
-import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
+// import * as csurf from 'csurf';
+// import * as rateLimit from 'express-rate-limit';
+// import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
+// import { TransformInterceptor } from './common/interceptor/transform.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // interceptor
-  app.useGlobalInterceptors(new LoggingInterceptor());
+  // app.useGlobalInterceptors(new LoggingInterceptor());
+  // app.useGlobalInterceptors(new TransformInterceptor());
 
   setupswagger(app);
 
