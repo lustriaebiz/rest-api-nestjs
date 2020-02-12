@@ -16,13 +16,18 @@ export class VcnRefController {
 
     }
 
-    @Get()
-    get() {
-        return this.service$.get();
-    }
+    // @Get()
+    // get() {
+    //     return this.service$.get();
+    // }
 
     @Get(':id')
     getById(@Param('id', new ParseIntPipe()) id: number) {
         return this.service$.getById(id);
+    }
+
+    @Get()
+    getTodos() {
+        return this.service$.getTodos();
     }
 }
