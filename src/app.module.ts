@@ -24,7 +24,7 @@ import { VcnRef } from './vcn-ref/vcn-ref.entity';
       username: 'root',
       password: '',
       database: 'nestdb1',
-      synchronize: true,
+      synchronize: false,
       entities: [User, VcnRef],
     }),
     TypeOrmModule.forRoot({
