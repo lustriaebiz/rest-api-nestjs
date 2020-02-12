@@ -2,7 +2,11 @@ import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import * as crypto from 'crypto';
 import { ApiProperty, ApiHideProperty, ApiExcludeEndpoint } from '@nestjs/swagger';
 
-@Entity()
+@Entity({
+    database: 'nestdb2',
+    name: 'users'
+})
+
 export class User {
 
     @PrimaryGeneratedColumn()

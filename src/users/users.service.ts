@@ -6,7 +6,10 @@ import { UserInterface } from './user.interface.interface';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(User) private usersRepository: Repository<User>){ }
+    constructor(
+        @InjectRepository(User) 
+        private usersRepository: Repository<User>
+    ){ }
 
     async getUsers(): Promise<User[]> {
         return await this.usersRepository.find();

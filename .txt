@@ -7,3 +7,8 @@ https://www.techiediaries.com/nestjs-tutorial-jwt-authentication/
 authentication passport-jwt [done]
 swagger [done]
 db transaction [done]
+
+node -v                                                                                         
+v9.8.0                                                                                                                                                                                                                                          
+npm -v                                                                                          
+5.6.0  

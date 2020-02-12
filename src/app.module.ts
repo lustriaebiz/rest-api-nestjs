@@ -9,11 +9,33 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
 // task-schedule
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksModule } from './tasks/tasks.module';
+import { User } from './users/user.entity';
 
 @Module({
   imports: [
     ScheduleModule.forRoot(),
-    TypeOrmModule.forRoot(),
+    // TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'nestdb1',
+      synchronize: true,
+      entities: [User],
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'nestdb2',
+      synchronize: false,
+      name: 'nestDb2Connection', //connection name
+      entities: [User],
+    }),
     UsersModule,
     AuthModule,
     TasksModule
