@@ -2,6 +2,7 @@ import { Controller, UseGuards, Get, Param, ParseIntPipe, Post } from '@nestjs/c
 import { VcnRefService } from './vcn-ref.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { AxiosService } from 'src/shared/axios/axios.service';
 
 @ApiTags('Vcn Ref')
 @Controller('vcn-ref')
@@ -12,8 +13,33 @@ import { AuthGuard } from '@nestjs/passport';
 
 @ApiBearerAuth() 
 export class VcnRefController {
-    constructor(private service$ : VcnRefService) {
+    constructor(
+        private service$    : VcnRefService,
+        private axios$      : AxiosService
+        ) {
 
+    }
+
+    
+    @Get('todos')
+    getTodos() {
+        return this.axios$.get();
+    }
+    
+    @Post()
+    async postTodos() {
+
+        let body = {
+            title: 'foo',
+            body: 'bar',
+            userId: 1
+        };
+
+        let post = await this.axios$.post(body);
+        console.log('data post: ', post);
+
+        return {status: true, data: post};
+        
     }
 
     @Get()
@@ -24,16 +50,6 @@ export class VcnRefController {
     @Get(':id')
     getById(@Param('id', new ParseIntPipe()) id: number) {
         return this.service$.getById(id);
-    }
-
-    @Get('/todos')
-    getTodos() {
-        return this.service$.getTodos();
-    }
-
-    @Post('/posts')
-    postTodos() {
-        return this.service$.postPosts();
     }
     
 }
