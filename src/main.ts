@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 /** swagger */
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -11,7 +13,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 // import { TransformInterceptor } from './common/interceptor/transform.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   // interceptor
   // app.useGlobalInterceptors(new LoggingInterceptor());
@@ -31,6 +33,11 @@ async function bootstrap() {
   //     max: 1000, // limit each IP to 100 requests per windowMs
   //   }),
   // );
+
+  
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.setViewEngine('hbs');
 
   await app.listen(3000);
   
