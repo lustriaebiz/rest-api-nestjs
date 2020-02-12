@@ -10,6 +10,8 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksModule } from './tasks/tasks.module';
 import { User } from './users/user.entity';
+import { VcnRefModule } from './vcn-ref/vcn-ref.module';
+import { VcnRef } from './vcn-ref/vcn-ref.entity';
 
 @Module({
   imports: [
@@ -23,7 +25,7 @@ import { User } from './users/user.entity';
       password: '',
       database: 'nestdb1',
       synchronize: true,
-      entities: [User],
+      entities: [User, VcnRef],
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -38,7 +40,8 @@ import { User } from './users/user.entity';
     }),
     UsersModule,
     AuthModule,
-    TasksModule
+    TasksModule,
+    VcnRefModule
   ],
   controllers: [AppController],
   providers: [AppService],
