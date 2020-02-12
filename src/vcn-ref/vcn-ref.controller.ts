@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, UseGuards, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { VcnRefService } from './vcn-ref.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
@@ -16,18 +16,24 @@ export class VcnRefController {
 
     }
 
-    // @Get()
-    // get() {
-    //     return this.service$.get();
-    // }
+    @Get()
+    get() {
+        return this.service$.get();
+    }
 
     @Get(':id')
     getById(@Param('id', new ParseIntPipe()) id: number) {
         return this.service$.getById(id);
     }
 
-    @Get()
+    @Get('/todos')
     getTodos() {
         return this.service$.getTodos();
     }
+
+    @Post('/posts')
+    postTodos() {
+        return this.service$.postPosts();
+    }
+    
 }
