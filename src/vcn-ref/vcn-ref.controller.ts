@@ -1,8 +1,9 @@
-import { Controller, UseGuards, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Controller, UseGuards, Get, Param, ParseIntPipe, Post, UseInterceptors } from '@nestjs/common';
 import { VcnRefService } from './vcn-ref.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { AxiosService } from 'src/shared/axios/axios.service';
+import { LoggingInterceptor } from 'src/common/interceptor/logging.interceptor';
 
 @ApiTags('Vcn Ref')
 @Controller('vcn-ref')
@@ -11,6 +12,7 @@ import { AxiosService } from 'src/shared/axios/axios.service';
 @UseGuards(AuthGuard('jwt'))
 /** end guard by controller */
 
+// @UseInterceptors(LoggingInterceptor)
 @ApiBearerAuth() 
 export class VcnRefController {
     constructor(

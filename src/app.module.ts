@@ -1,4 +1,5 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -12,9 +13,14 @@ import { TasksModule } from './tasks/tasks.module';
 import { User } from './users/user.entity';
 import { VcnRefModule } from './vcn-ref/vcn-ref.module';
 import { VcnRef } from './vcn-ref/vcn-ref.entity';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
 
 @Module({
   imports: [
+    // ConfigModule.forRoot({
+    //   envFilePath: '.development.env',
+    // }),
     ScheduleModule.forRoot(),
     // TypeOrmModule.forRoot(),
     TypeOrmModule.forRoot({
@@ -44,7 +50,13 @@ import { VcnRef } from './vcn-ref/vcn-ref.entity';
     VcnRefModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
