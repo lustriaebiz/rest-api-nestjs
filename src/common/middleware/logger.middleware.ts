@@ -6,8 +6,8 @@ export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: Function) {
     let bearerToken = req.headers.authorization;
     
-    console.log('Request...');
-    console.log('Req Bearer: ', bearerToken);
+    console.log('~ middleware ~');
+    console.log('Authorization Bearer: ', bearerToken);
     
     next();
   }
