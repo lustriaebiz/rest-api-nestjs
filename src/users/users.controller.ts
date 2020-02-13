@@ -7,12 +7,16 @@ import { getConnection } from "typeorm";
 import { ApiResponse, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { response } from 'express';
+// import { RolesGuard } from 'src/common/guard/roles.guard';
 
 @ApiTags('Users')
 @Controller('users')
 
 /** guard by controller */
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(
+    AuthGuard('jwt') 
+    // new RolesGuard()
+)
 /** end guard by controller */
 
 @ApiBearerAuth() //To enable bearer authentication, use @ApiBearerAuth().
