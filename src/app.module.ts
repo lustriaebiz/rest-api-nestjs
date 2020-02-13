@@ -14,9 +14,9 @@ import { User } from './users/user.entity';
 import { VcnRefModule } from './vcn-ref/vcn-ref.module';
 import { VcnRef } from './vcn-ref/vcn-ref.entity';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { LoggingInterceptor } from './common/interceptor/logging.interceptor';
-import { TransformInterceptor } from './common/interceptor/transform.interceptor';
-import { ErrorsInterceptor } from './common/interceptor/errors.interceptor';
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
+import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import { ErrorsInterceptor } from './common/interceptors/errors.interceptor';
 
 @Module({
   imports: [
@@ -64,10 +64,10 @@ import { ErrorsInterceptor } from './common/interceptor/errors.interceptor';
       provide: APP_INTERCEPTOR,
       useClass: TransformInterceptor, 
     },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ErrorsInterceptor, 
-    },
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: ErrorsInterceptor, 
+    // },
     /** */
   ],
 })

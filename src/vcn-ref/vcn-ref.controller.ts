@@ -3,7 +3,7 @@ import { VcnRefService } from './vcn-ref.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { AxiosService } from 'src/shared/axios/axios.service';
-import { LoggingInterceptor } from 'src/common/interceptor/logging.interceptor';
+// import { LoggingInterceptor } from 'src/common/interceptors/logging.interceptor';
 
 @ApiTags('Vcn Ref')
 @Controller('vcn-ref')

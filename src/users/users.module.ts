@@ -4,7 +4,7 @@ import { UsersController } from './users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from 'src/common/guard/roles.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @Module({
   imports: [

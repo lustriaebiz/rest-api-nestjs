@@ -1,8 +1,10 @@
-import { Controller, Post, Body } from  '@nestjs/common';
+import { Controller, Post, Body, UsePipes } from  '@nestjs/common';
 import { AuthService } from  '../auth/auth.service';
 import { User } from  '../users/user.entity';
 import { ApiTags } from '@nestjs/swagger';
-import { Login } from 'src/shared/login.dto';
+import { Login } from 'src/auth/dto/login';
+import { PasswordHashPipe } from 'src/common/pipes/passwordHash.pipe';
+import { Register } from './dto/register';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -17,7 +19,10 @@ export class AuthController {
     }  
 
     @Post('register')
-    async register(@Body() user: User): Promise<any> {
+    @UsePipes(new PasswordHashPipe(Register))
+    async register(@Body() user: Register): Promise<any> {
+      console.log('mashoook');
+      
       return this.authService.register(user);
     }  
 }
