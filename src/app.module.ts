@@ -17,6 +17,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { ErrorsInterceptor } from './common/interceptors/errors.interceptor';
+import { MailerService } from './shared/mailer/mailer.service';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { ErrorsInterceptor } from './common/interceptors/errors.interceptor';
       provide: APP_INTERCEPTOR,
       useClass: TransformInterceptor, 
     },
+    MailerService,
     // {
     //   provide: APP_INTERCEPTOR,
     //   useClass: ErrorsInterceptor, 

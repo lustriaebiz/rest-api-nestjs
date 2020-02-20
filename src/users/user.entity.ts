@@ -28,11 +28,6 @@ export class User {
     @ApiProperty({ example: 'lustriaebiz@gmail.com', required: true })
     email: string;
 
-    @BeforeInsert()
-    hashPassword() {
-        this.password = crypto.createHmac('sha256', this.password).digest('hex');
-    }
-
     @Column()
     @ApiProperty({ 
         example: 'secret!@#' ,
